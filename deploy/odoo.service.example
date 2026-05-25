@@ -1,0 +1,19 @@
+[Unit]
+Description=Odoo Server
+Documentation=https://www.odoo.com/documentation
+After=network.target postgresql.service
+Wants=postgresql.service
+
+[Service]
+Type=simple
+User=odoo
+Group=odoo
+WorkingDirectory=/opt/odoo/odoo
+ExecStart=/opt/odoo/odoo/.venv/bin/python /opt/odoo/odoo/odoo-bin -c /etc/odoo/odoo.conf
+Restart=always
+RestartSec=5
+StandardOutput=journal
+StandardError=journal
+
+[Install]
+WantedBy=multi-user.target

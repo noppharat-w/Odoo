@@ -7,6 +7,7 @@ _build/
 !.gitkeep
 !.github
 !.dockerignore
+!.gitattributes
 !.mailmap
 !.weblate.json
 # compiled python files
