@@ -1,0 +1,15 @@
+[options]
+admin_passwd = ${ADMIN_PASSWORD}
+addons_path = ${ADDONS_PATH}
+data_dir = /var/lib/odoo
+db_host = ${DB_HOST}
+db_port = ${DB_PORT}
+db_user = ${DB_USER}
+db_password = ${DB_PASSWORD}
+http_interface = 0.0.0.0
+http_port = ${HTTP_PORT}
+proxy_mode = ${PROXY_MODE}
+workers = ${WORKERS}
+max_cron_threads = ${MAX_CRON_THREADS}
+limit_time_cpu = 600
+limit_time_real = 1200

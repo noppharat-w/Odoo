@@ -1,0 +1,46 @@
+services:
+  db:
+    image: postgres:16
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: postgres
+      POSTGRES_USER: ${POSTGRES_USER:-odoo}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-odoo}
+      PGDATA: /var/lib/postgresql/data/pgdata
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-odoo} -d postgres"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+
+  odoo:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: local/odoo-source:19
+    restart: unless-stopped
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      DB_HOST: db
+      DB_PORT: 5432
+      DB_USER: ${POSTGRES_USER:-odoo}
+      DB_PASSWORD: ${POSTGRES_PASSWORD:-odoo}
+      ADMIN_PASSWORD: ${ODOO_ADMIN_PASSWORD:-admin}
+      ADDONS_PATH: /opt/odoo/addons,/opt/odoo/odoo/addons
+      HTTP_PORT: 8069
+      PROXY_MODE: ${ODOO_PROXY_MODE:-False}
+      WORKERS: ${ODOO_WORKERS:-0}
+      MAX_CRON_THREADS: ${ODOO_MAX_CRON_THREADS:-1}
+    ports:
+      - "${ODOO_HTTP_PORT:-8069}:8069"
+    volumes:
+      - .:/opt/odoo:ro
+      - odoo-data:/var/lib/odoo
+
+volumes:
+  postgres-data:
+  odoo-data:

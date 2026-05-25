@@ -1,0 +1,12 @@
+.git
+.qodo
+.venv
+__pycache__/
+*.pyc
+*.pyo
+*.egg-info
+node_modules
+odoo/filestore
+docker-compose.override.yml
+odoo.conf
+*.log
