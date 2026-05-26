@@ -31,8 +31,12 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
         libxslt1-dev \
         nodejs \
         npm \
-        wkhtmltopdf \
         zlib1g-dev \
+    && if apt-cache show wkhtmltopdf >/dev/null 2>&1; then \
+        apt-get install -y --no-install-recommends wkhtmltopdf; \
+    else \
+        echo "wkhtmltopdf is not available from this apt repository. PDF reports may need a manual wkhtmltopdf install."; \
+    fi \
     && npm install -g rtlcss less less-plugin-clean-css \
     && rm -rf /var/lib/apt/lists/*
 
