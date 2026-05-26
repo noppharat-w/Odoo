@@ -31,7 +31,6 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
         libxslt1-dev \
         nodejs \
         npm \
-        zlib1g-dev \
     && if apt-cache show wkhtmltopdf >/dev/null 2>&1; then \
         apt-get install -y --no-install-recommends wkhtmltopdf; \
     else \
