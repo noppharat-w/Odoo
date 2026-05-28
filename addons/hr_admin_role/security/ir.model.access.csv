@@ -1,0 +1,10 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_ir_actions_actions_hr_admin,ir.actions.actions hr admin,base.model_ir_actions_actions,hr_admin_role.group_hr_admin,1,0,0,0
+access_ir_actions_act_window_hr_admin,ir.actions.act_window hr admin,base.model_ir_actions_act_window,hr_admin_role.group_hr_admin,1,0,0,0
+access_ir_actions_act_window_view_hr_admin,ir.actions.act_window.view hr admin,base.model_ir_actions_act_window_view,hr_admin_role.group_hr_admin,1,0,0,0
+access_ir_actions_server_hr_admin,ir.actions.server hr admin,base.model_ir_actions_server,hr_admin_role.group_hr_admin,1,0,0,0
+access_res_config_hr_admin,res.config hr admin,base.model_res_config,hr_admin_role.group_hr_admin,1,1,1,0
+access_res_config_settings_hr_admin,res.config.settings hr admin,base.model_res_config_settings,hr_admin_role.group_hr_admin,1,1,1,0
+access_res_lang_hr_admin,res.lang hr admin,base.model_res_lang,hr_admin_role.group_hr_admin,1,1,1,1
+access_base_language_install_hr_admin,base.language.install hr admin,base.model_base_language_install,hr_admin_role.group_hr_admin,1,1,1,0
+access_base_language_import_hr_admin,base.language.import hr admin,base.model_base_language_import,hr_admin_role.group_hr_admin,1,1,1,0
