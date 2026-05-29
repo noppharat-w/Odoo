@@ -4,28 +4,31 @@
         <record id="res_config_settings_view_form_hr_admin" model="ir.ui.view">
             <field name="name">res.config.settings.view.form.hr.admin</field>
             <field name="model">res.config.settings</field>
-            <field name="inherit_id" ref="base_setup.res_config_settings_view_form"/>
-            <field name="priority" eval="999"/>
-            <field name="groups_id" eval="[Command.link(ref('hr_admin_role.group_hr_admin'))]"/>
+            <field name="inherit_id" ref="base.res_config_settings_view_form"/>
+            <field name="priority" eval="9999"/>
             <field name="arch" type="xml">
+                <xpath expr="//form" position="inside">
+                    <field name="is_hr_admin_role" invisible="1"/>
+                </xpath>
+
                 <xpath expr="//app" position="attributes">
-                    <attribute name="groups">!hr_admin_role.group_hr_admin</attribute>
+                    <attribute name="invisible">is_hr_admin_role</attribute>
                 </xpath>
 
                 <xpath expr="//app[@name='general_settings']" position="attributes">
-                    <attribute name="groups"/>
+                    <attribute name="invisible"/>
                 </xpath>
 
                 <xpath expr="//app[@name='general_settings']/*[not(@id='invite_users') and not(@id='languages') and not(@id='companies') and not(@id='about') and not(self::field and @name='is_root_company')]" position="attributes">
-                    <attribute name="groups">!hr_admin_role.group_hr_admin</attribute>
+                    <attribute name="invisible">is_hr_admin_role</attribute>
                 </xpath>
 
                 <xpath expr="//setting[@id='document_layout_setting']" position="attributes">
-                    <attribute name="groups">!hr_admin_role.group_hr_admin</attribute>
+                    <attribute name="invisible">is_hr_admin_role</attribute>
                 </xpath>
 
                 <xpath expr="//setting[@id='inter_company']" position="attributes">
-                    <attribute name="groups">!hr_admin_role.group_hr_admin</attribute>
+                    <attribute name="invisible">is_hr_admin_role</attribute>
                 </xpath>
 
                 <xpath expr="//div[@id='languages']//div[@groups='base.group_no_one']" position="attributes">
