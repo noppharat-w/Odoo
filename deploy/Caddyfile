@@ -11,7 +11,7 @@ https://:8069 {
 		-Server
 	}
 
-	reverse_proxy odoo:8070 {
+	reverse_proxy odoo:8069 {
 		header_up Host {host}
 		header_up X-Real-IP {remote_host}
 		header_up X-Forwarded-For {remote_host}

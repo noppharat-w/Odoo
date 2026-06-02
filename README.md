@@ -5,7 +5,7 @@ Deploy Odoo ด้วย Docker Compose และเปิดใช้งาน�
 URL หลัง deploy:
 
 ```text
-https://<server-ip-or-domain>:8069
+https://10.110.23.90:8069/
 ```
 
 ## Deploy บน Server
@@ -14,8 +14,10 @@ https://<server-ip-or-domain>:8069
 
 ```bash
 git pull
+chmod +x deploy/generate-self-signed-cert.sh
+./deploy/generate-self-signed-cert.sh 10.110.23.90
 docker compose build --no-cache --progress=plain odoo
-docker compose up -d
+docker compose up -d --force-recreate
 ```
 
 ตรวจสอบสถานะ:
@@ -31,17 +33,29 @@ docker compose logs -f odoo
 docker compose logs -f https
 ```
 
+ทดสอบ HTTPS:
+
+```bash
+curl -vk https://10.110.23.90:8069/web/login
+```
+
 ## HTTPS Port 8069
 
 Stack นี้ใช้ `caddy` เป็น HTTPS reverse proxy:
 
 - Host port `8069` เปิดเป็น HTTPS
-- Odoo container รัน HTTP ภายใน Docker network ที่พอร์ต `8070`
+- Odoo container รัน HTTP ภายใน Docker network ที่พอร์ต `8069`
 - Odoo ไม่ถูก publish ออก host โดยตรง
 - `proxy_mode` เปิดใช้งานเป็นค่า default
-- Certificate ถูกสร้างอัตโนมัติแบบ internal/self-signed
+- Certificate ใช้ไฟล์จาก `deploy/certs/fullchain.pem` และ `deploy/certs/privkey.pem`
 
-ถ้าเข้าเว็บครั้งแรกแล้ว browser แจ้งเตือน certificate ให้กดยอมรับ certificate หรือ import Caddy root CA จาก Docker volume `caddy-data` เข้าเครื่อง client ที่ต้องใช้งาน
+ถ้ายังไม่มี certificate ให้สร้าง self-signed certificate ที่มี SAN เป็น IP server:
+
+```bash
+./deploy/generate-self-signed-cert.sh 10.110.23.90
+```
+
+ถ้าเข้าเว็บครั้งแรกแล้ว browser แจ้งเตือน certificate ให้กดยอมรับ certificate ได้ เพราะ certificate เป็น self-signed สำหรับ internal testing
 
 ## Firewall
 

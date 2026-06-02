@@ -31,12 +31,12 @@ services:
       DB_PASSWORD: ${POSTGRES_PASSWORD:-odoo}
       ADMIN_PASSWORD: ${ODOO_ADMIN_PASSWORD:-admin}
       ADDONS_PATH: /opt/odoo/addons,/opt/odoo/odoo/addons
-      HTTP_PORT: 8070
+      HTTP_PORT: 8069
       PROXY_MODE: True
       WORKERS: ${ODOO_WORKERS:-0}
       MAX_CRON_THREADS: ${ODOO_MAX_CRON_THREADS:-1}
     expose:
-      - "8070"
+      - "8069"
     volumes:
       - .:/opt/odoo:ro
       - odoo-data:/var/lib/odoo
@@ -44,7 +44,7 @@ services:
       test:
         [
           "CMD-SHELL",
-          "python -c \"import urllib.request; urllib.request.urlopen('http://127.0.0.1:8070/web/login', timeout=5).read()\"",
+          "python -c \"import urllib.request; urllib.request.urlopen('http://127.0.0.1:8069/web/login', timeout=5).read()\"",
         ]
       interval: 30s
       timeout: 10s
