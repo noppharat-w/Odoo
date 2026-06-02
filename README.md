@@ -36,7 +36,7 @@ docker compose logs -f https
 Stack นี้ใช้ `caddy` เป็น HTTPS reverse proxy:
 
 - Host port `8069` เปิดเป็น HTTPS
-- Odoo container ยังรัน HTTP ภายในที่พอร์ต `8069`
+- Odoo container รัน HTTP ภายใน Docker network ที่พอร์ต `8070`
 - Odoo ไม่ถูก publish ออก host โดยตรง
 - `proxy_mode` เปิดใช้งานเป็นค่า default
 - Certificate ถูกสร้างอัตโนมัติแบบ internal/self-signed
