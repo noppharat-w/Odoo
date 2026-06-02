@@ -41,7 +41,7 @@ curl -vk https://10.110.23.90:8069/web/login
 
 ## HTTPS Port 8069
 
-Stack นี้ใช้ `caddy` เป็น HTTPS reverse proxy:
+Stack นี้ใช้ `nginx` เป็น HTTPS reverse proxy:
 
 - Host port `8069` เปิดเป็น HTTPS
 - Odoo container รัน HTTP ภายใน Docker network ที่พอร์ต `8069`
@@ -53,6 +53,12 @@ Stack นี้ใช้ `caddy` เป็น HTTPS reverse proxy:
 
 ```bash
 ./deploy/generate-self-signed-cert.sh 10.110.23.90
+```
+
+ตรวจสอบ nginx config:
+
+```bash
+docker compose run --rm --no-deps https nginx -t
 ```
 
 ถ้าเข้าเว็บครั้งแรกแล้ว browser แจ้งเตือน certificate ให้กดยอมรับ certificate ได้ เพราะ certificate เป็น self-signed สำหรับ internal testing
